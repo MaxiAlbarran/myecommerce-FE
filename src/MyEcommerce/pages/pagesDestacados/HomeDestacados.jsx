@@ -3,6 +3,7 @@ import firebase from '../../config/firebase';
 import HomeComponent from '../../components/Home/index';
 import Menu from '../../components/Menu/index';
 import LoadingSpinner from '../../components/LoadingSpinner/index';
+import Titulo from '../../components/Title';
 
 const Home = () => {
   const [productos, setProductos] = useState([]);
@@ -14,6 +15,10 @@ const Home = () => {
       justifyContent: 'center',
       alignItems: 'center',
       flexWrap: 'wrap',
+      marginLeft: 'auto',
+      marginTop: 'auto',
+      marginRight: 'auto',
+      marginBottom: 'auto',
     },
   };
 
@@ -38,7 +43,7 @@ const Home = () => {
       <div>
         <Menu category='Destacados' />
         <div>
-          <h2>Productos destacados</h2>
+          <Titulo message='Productos destacados' />
         </div>
         <div style={styles.layout}>
           {productos.map((producto) => (
@@ -47,7 +52,7 @@ const Home = () => {
               category='Destacados'
               bg='dark'
               text='light'
-              border="light"
+              border='light'
             />
           ))}
         </div>

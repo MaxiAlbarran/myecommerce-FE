@@ -9,12 +9,13 @@ const HomeComponent = (props) => {
   return (
     <div>
       <Card
-        style={{ width: '20rem', height: '42rem'}}
+        style={{ width: '20rem', height: 'auto' }}
         border={border}
         bg={bg}
         text={text}
       >
         <Card.Body>
+          <Card.Img variant='top' src={datos.img} />
           <Card.Title>{datos.name}</Card.Title>
           <Card.Text>ARS ${datos.price}</Card.Text>
           <Card.Text>Stock: {datos.SKU}</Card.Text>

@@ -8,10 +8,10 @@ const DetalleTech = (props) => {
   const id = props.match.params.id;
   const [carga, setCarga] = useState(true);
   const [detalles, setDetalles] = useState({});
-  const [showAlert, setShowAlert] = useState({variant:'', text:''});
+  const [showAlert, setShowAlert] = useState({ variant: '', text: '' });
 
   const handleClick = () => {
-    setShowAlert({variant:'primary', text:'Gracias por su compra!'});
+    setShowAlert({ variant: 'primary', text: 'Gracias por su compra!' });
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const DetalleTech = (props) => {
   } else {
     return (
       <div>
-        <Menu category='Tech'/>
+        <Menu category='Tech' />
         <ProductsDetails
           name={detalles.name}
           description={detalles.description}

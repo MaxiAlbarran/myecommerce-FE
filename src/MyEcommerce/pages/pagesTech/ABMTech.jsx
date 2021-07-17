@@ -13,7 +13,8 @@ const ProductsTech = () => {
     price: '',
     id: null,
     SKU: '',
-    category:''
+    category: '',
+    img: null,
   });
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,7 +102,7 @@ const ProductsTech = () => {
   } else {
     return (
       <div>
-        <Menu category='Tech'/>
+        <Menu category='Tech' />
         <form onSubmit={handleSubmit}>
           <div>
             <h2>Alta de nuevas productos de tecnologia</h2>

@@ -7,8 +7,8 @@ const Menu = ({ category }) => {
     <Navbar bg='light' variant='light' expand='lg'>
       <Navbar.Brand>Maxi Albarran Ecommerce</Navbar.Brand>
       <Nav.Link as={Link} to={'/Home/' + category}>
-          Inicio
-        </Nav.Link>
+        Inicio
+      </Nav.Link>
       <Nav className='mr-auto'>
         <NavDropdown title='Categorias' id='basic-nav-dropdown'>
           <NavDropdown.Item as={Link} to='/Home/Destacados'>

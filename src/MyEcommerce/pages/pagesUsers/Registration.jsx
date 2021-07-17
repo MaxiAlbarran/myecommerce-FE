@@ -78,7 +78,7 @@ const Registration = () => {
           size='sm'
           style={{
             marginTop: '10px',
-            marginBottom:"10px"
+            marginBottom: '10px',
           }}
         >
           Iniciar sesion

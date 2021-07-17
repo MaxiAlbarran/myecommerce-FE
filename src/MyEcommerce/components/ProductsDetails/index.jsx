@@ -34,9 +34,8 @@ const ProductsDetails = (props) => {
 
   return (
     <div>
-      
       <div>
-        <Card bg="light" text="dark">
+        <Card bg='light' text='dark'>
           <Card.Title style={styles[0].name}>{name}</Card.Title>
         </Card>
       </div>

@@ -3,6 +3,7 @@ import firebase from '../../config/firebase';
 import HomeComponent from '../../components/Home/index';
 import Menu from '../../components/Menu/index';
 import LoadingSpinner from '../../components/LoadingSpinner/index';
+import Titulo from '../../components/Title';
 
 const HomeCamisetas = () => {
   const [productos, setProductos] = useState([]);
@@ -38,7 +39,7 @@ const HomeCamisetas = () => {
       <div>
         <Menu category='Camisetas' />
         <div>
-          <h2>Nuevo ingreso de Camisetas</h2>
+          <Titulo message='Nuevo ingreso de Camisetas' />
         </div>
         <div style={styles.layout}>
           {productos.map((producto) => (
@@ -47,7 +48,7 @@ const HomeCamisetas = () => {
               category='Camisetas'
               bg='secondary'
               text='light'
-              border="dark"
+              border='dark'
             />
           ))}
         </div>

@@ -3,6 +3,7 @@ import firebase from '../../config/firebase';
 import HomeComponent from '../../components/Home/index';
 import Menu from '../../components/Menu/index';
 import LoadingSpinner from '../../components/LoadingSpinner/index';
+import Titulo from '../../components/Title';
 
 const HomeTech = () => {
   const [productos, setProductos] = useState([]);
@@ -14,6 +15,10 @@ const HomeTech = () => {
       justifyContent: 'center',
       alignItems: 'center',
       flexWrap: 'wrap',
+      marginLeft: 'auto',
+      marginTop: 'auto',
+      marginRight: 'auto',
+      marginBottom: 'auto',
     },
   };
 
@@ -38,7 +43,7 @@ const HomeTech = () => {
       <div>
         <Menu category='Tech' />
         <div>
-          <h2>Productos de Tecnologia</h2>
+          <Titulo message='Productos de tecnologia' />
         </div>
         <div style={styles.layout}>
           {productos.map((producto) => (
@@ -47,7 +52,7 @@ const HomeTech = () => {
               category='Tech'
               bg='light'
               text='dark'
-              border="dark"
+              border='dark'
             />
           ))}
         </div>

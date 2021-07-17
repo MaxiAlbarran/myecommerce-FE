@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
 import LoadingButton from '../../components/Formularios/LoadingButton/index';
 import Alerts from '../../components/Formularios/Alerts/index';
-import PasswordButton from '../../components/Formularios/PasswordButton/index'
+import PasswordButton from '../../components/Formularios/PasswordButton/index';
 
 const Login = () => {
   const [usuario, setUsuario] = useState({ email: '', password: '' });
@@ -51,8 +51,6 @@ const Login = () => {
     setUsuario({ ...usuario, [name]: value });
   };
 
-  
-
   return (
     <div>
       <h1>Bienvenido a My Ecommerce!</h1>
@@ -95,8 +93,6 @@ const Login = () => {
           <Alerts variant={alerts.variant} text={alerts.text} />
         </div>
       </form>
-      
-      
     </div>
   );
 };

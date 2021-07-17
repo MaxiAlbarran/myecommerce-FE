@@ -13,7 +13,8 @@ const Products = () => {
     price: '',
     id: null,
     SKU: '',
-    category:''
+    category: '',
+    img: null,
   });
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -101,7 +102,7 @@ const Products = () => {
   } else {
     return (
       <div>
-        <Menu category='Destacados'/>
+        <Menu category='Destacados' />
         <form onSubmit={handleSubmit}>
           <div>
             <h2>Alta de productos</h2>

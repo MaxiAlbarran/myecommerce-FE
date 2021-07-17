@@ -10,7 +10,7 @@ const ABMComponent = (props) => {
   };
 
   return (
-    <Card style={{ width: '18rem', marginBottom: "10px" }} border="dark">
+    <Card style={{ width: '18rem', marginBottom: '10px' }} border='dark'>
       <Card.Body>
         <Card.Title>{datos.name}</Card.Title>
         <ListGroup variant='flush'>
