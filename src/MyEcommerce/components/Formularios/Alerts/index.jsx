@@ -1,0 +1,10 @@
+import react from 'react';
+import { Alert } from 'react-bootstrap';
+
+const Alerts = (props) => {
+  const { variant, text } = props;
+
+  return <Alert variant={variant}>{text}</Alert>;
+};
+
+export default Alerts;
