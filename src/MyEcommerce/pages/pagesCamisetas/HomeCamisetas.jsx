@@ -13,8 +13,8 @@ const HomeCamisetas = () => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center',
       flexWrap: 'wrap',
+      marginBottom: "5px"
     },
   };
 

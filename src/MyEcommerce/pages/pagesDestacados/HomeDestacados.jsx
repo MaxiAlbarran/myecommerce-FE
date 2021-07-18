@@ -13,12 +13,8 @@ const Home = () => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center',
       flexWrap: 'wrap',
-      marginLeft: 'auto',
-      marginTop: 'auto',
-      marginRight: 'auto',
-      marginBottom: 'auto',
+      marginBottom: '5px',
     },
   };
 

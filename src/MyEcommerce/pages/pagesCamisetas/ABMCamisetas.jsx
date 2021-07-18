@@ -14,7 +14,7 @@ const ProductsCamisetas = () => {
     id: null,
     SKU: '',
     category: '',
-    img: null,
+    img: '',
   });
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -149,6 +149,15 @@ const ProductsCamisetas = () => {
               type='text'
               name='SKU'
               value={productoForm.SKU}
+              change={handleChange}
+            />
+          </div>
+          <div>
+            <BootstrapForm
+              label='Imagen'
+              type='text'
+              name='img'
+              value={productoForm.img}
               change={handleChange}
             />
           </div>
