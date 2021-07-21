@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
-import ABMComponent from '../../components/ABM/index';
-import Menu from '../../components/Menu/index';
-import LoadingSpinner from '../../components/LoadingSpinner/index';
-import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
+import ABMComponent from '../ABMComponent/index';
+import LoadingSpinner from '../LoadingSpinner/index';
+import BootstrapForm from '../Formularios/BootstrapForm/index';
 import { Button } from 'react-bootstrap';
 
-const ProductsTech = () => {
+const Products = () => {
   const [productoForm, setProductoForm] = useState({
     name: '',
     description: '',
@@ -32,7 +31,7 @@ const ProductsTech = () => {
   const showProducts = async () => {
     try {
       setLoading(true);
-      const querySnapshot = await firebase.db.collection('tecnologia').get();
+      const querySnapshot = await firebase.db.collection('productos').get();
       setProductos(querySnapshot.docs);
       setLoading(false);
       setReload(false);
@@ -58,11 +57,11 @@ const ProductsTech = () => {
       let newProducts;
       if (productoForm.id === null) {
         newProducts = await firebase.db
-          .collection('tecnologia')
+          .collection('productos')
           .add(productoForm);
       } else {
         newProducts = await firebase.db
-          .doc('tecnologia/' + productoForm.id)
+          .doc('productos/' + productoForm.id)
           .set(productoForm);
       }
 
@@ -88,7 +87,7 @@ const ProductsTech = () => {
   const handleCLickDelete = async (producto) => {
     try {
       const documentDelete = await firebase.db
-        .doc('tecnologia/' + producto.id)
+        .doc('productos/' + producto.id)
         .delete();
       setReload(true);
       console.log(documentDelete);
@@ -102,10 +101,9 @@ const ProductsTech = () => {
   } else {
     return (
       <div>
-        <Menu category='Tech' />
         <form onSubmit={handleSubmit}>
           <div>
-            <h2>Alta de nuevas productos de tecnologia</h2>
+            <h2>Alta de productos destacados</h2>
           </div>
           <div>
             <BootstrapForm
@@ -160,8 +158,9 @@ const ProductsTech = () => {
         </form>
         <h2>Listado de productos</h2>
         <div style={styles.cards}>
-          {productos.map((producto) => (
+          {productos.map((producto, i) => (
             <ABMComponent
+              key={producto.id}
               datos={{ ...producto.data(), id: producto.id }}
               clickCambiar={handleClickCambiar}
               clickDelete={handleCLickDelete}
@@ -173,4 +172,4 @@ const ProductsTech = () => {
   }
 };
 
-export default ProductsTech;
+export default Products;

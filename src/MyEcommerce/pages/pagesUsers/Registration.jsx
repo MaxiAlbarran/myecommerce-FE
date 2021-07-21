@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import firebase from '../../config/firebase';
 import LoadingButton from '../../components/Formularios/LoadingButton/index';
 import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
 import Alerts from '../../components/Formularios/Alerts/index';
-import { Button } from 'react-bootstrap';
+import Menu from '../../components/Menu/MenuUsuarios/index';
 
 const Registration = () => {
   const [info, setInfo] = useState({
-    nombre: '',
-    apellido: '',
+    name: '',
+    surname: '',
     email: '',
-    dni: '',
+    username: '',
     password: '',
   });
   const [loading, setLoading] = useState(false);
   const [alerts, setAlerts] = useState({ variant: '', text: '' });
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,14 +30,15 @@ const Registration = () => {
       );
       console.log('Usuario creado', newUser);
       const document = await firebase.db.collection('clientes').add({
-        nombre: info.nombre,
-        apellido: info.apellido,
-        dni: info.dni,
-        id: newUser.user.uid,
+        name: info.name,
+        surname: info.surname,
+        username: info.username,
+        idIngreso: newUser.user.uid,
       });
       setAlerts({ variant: 'success', text: 'Registro exitoso' });
       console.log('Nuevo documento', document);
       setLoading(false);
+      setShowAlert(true);
     } catch (e) {
       if (e.code === 'auth/invalid-email') {
         setAlerts({
@@ -69,29 +70,15 @@ const Registration = () => {
 
   return (
     <div>
-      <div>
-        <Button
-          type='button'
-          as={Link}
-          to='/'
-          variant='danger'
-          size='sm'
-          style={{
-            marginTop: '10px',
-            marginBottom: '10px',
-          }}
-        >
-          Iniciar sesion
-        </Button>
-      </div>
+      <Menu login={false} />
       <h1>Complete con sus datos</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <BootstrapForm
             label='Nombre'
             type='text'
-            name='nombre'
-            value={info.nombre}
+            name='name'
+            value={info.name}
             change={handleChange}
             message='Ingrese su nombre'
           />
@@ -100,8 +87,8 @@ const Registration = () => {
           <BootstrapForm
             label='Apellido'
             type='text'
-            name='apellido'
-            value={info.apellido}
+            name='surname'
+            value={info.surname}
             change={handleChange}
             message='Ingrese su apellido'
           />
@@ -118,12 +105,12 @@ const Registration = () => {
         </div>
         <div>
           <BootstrapForm
-            label='DNI'
-            type='number'
-            name='dni'
-            value={info.dni}
+            label='Nombre de usuario'
+            type='text'
+            name='username'
+            value={info.username}
             change={handleChange}
-            message='Ingrese su numero de Documento Nacional de Identidad'
+            message='Ingrese un nombre de usuario'
           />
         </div>
         <div>
@@ -142,7 +129,11 @@ const Registration = () => {
           </LoadingButton>
         </div>
         <div>
-          <Alerts variant={alerts.variant} text={alerts.text} />
+          <Alerts
+            variant={alerts.variant}
+            text={alerts.text}
+            button={showAlert}
+          />
         </div>
       </form>
     </div>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
-import ABMComponent from '../../components/ABM/index';
-import Menu from '../../components/Menu/index';
-import LoadingSpinner from '../../components/LoadingSpinner/index';
-import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
+import ABMComponent from '../ABMComponent/index';
+import LoadingSpinner from '../LoadingSpinner/index';
+import BootstrapForm from '../Formularios/BootstrapForm/index';
 import { Button } from 'react-bootstrap';
 
-const ProductsCamisetas = () => {
+const ProductsTech = () => {
   const [productoForm, setProductoForm] = useState({
     name: '',
     description: '',
@@ -14,7 +13,7 @@ const ProductsCamisetas = () => {
     id: null,
     SKU: '',
     category: '',
-    img: '',
+    img: null,
   });
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +31,7 @@ const ProductsCamisetas = () => {
   const showProducts = async () => {
     try {
       setLoading(true);
-      const querySnapshot = await firebase.db.collection('camisetas').get();
+      const querySnapshot = await firebase.db.collection('tecnologia').get();
       setProductos(querySnapshot.docs);
       setLoading(false);
       setReload(false);
@@ -58,11 +57,11 @@ const ProductsCamisetas = () => {
       let newProducts;
       if (productoForm.id === null) {
         newProducts = await firebase.db
-          .collection('camisetas')
+          .collection('tecnologia')
           .add(productoForm);
       } else {
         newProducts = await firebase.db
-          .doc('camisetas/' + productoForm.id)
+          .doc('tecnologia/' + productoForm.id)
           .set(productoForm);
       }
 
@@ -88,7 +87,7 @@ const ProductsCamisetas = () => {
   const handleCLickDelete = async (producto) => {
     try {
       const documentDelete = await firebase.db
-        .doc('camisetas/' + producto.id)
+        .doc('tecnologia/' + producto.id)
         .delete();
       setReload(true);
       console.log(documentDelete);
@@ -102,10 +101,9 @@ const ProductsCamisetas = () => {
   } else {
     return (
       <div>
-        <Menu category='Camisetas' />
         <form onSubmit={handleSubmit}>
           <div>
-            <h2>Alta de nuevas Camisetas</h2>
+            <h2>Alta de productos de tecnologia</h2>
           </div>
           <div>
             <BootstrapForm
@@ -153,15 +151,6 @@ const ProductsCamisetas = () => {
             />
           </div>
           <div>
-            <BootstrapForm
-              label='Imagen'
-              type='text'
-              name='img'
-              value={productoForm.img}
-              change={handleChange}
-            />
-          </div>
-          <div>
             <Button type='submit' variant='warning' size='sm'>
               Agregar
             </Button>
@@ -169,8 +158,9 @@ const ProductsCamisetas = () => {
         </form>
         <h2>Listado de productos</h2>
         <div style={styles.cards}>
-          {productos.map((producto) => (
+          {productos.map((producto, i) => (
             <ABMComponent
+              key={producto.id}
               datos={{ ...producto.data(), id: producto.id }}
               clickCambiar={handleClickCambiar}
               clickDelete={handleCLickDelete}
@@ -182,4 +172,4 @@ const ProductsCamisetas = () => {
   }
 };
 
-export default ProductsCamisetas;
+export default ProductsTech;

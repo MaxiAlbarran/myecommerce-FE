@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../config/firebase';
-import Menu from '../../components/Menu/index';
+import Menu from '../../components/Menu/MenuUsuarios/index';
 import LoadingSpinner from '../../components/LoadingSpinner/index';
 import ProductsDetails from '../../components/ProductsDetails/index';
 
@@ -28,7 +28,7 @@ const Detalle = (props) => {
   } else {
     return (
       <div>
-        <Menu category='Destacados' />
+        <Menu category='Destacados' login={true} />
         <ProductsDetails
           name={detalles.name}
           description={detalles.description}

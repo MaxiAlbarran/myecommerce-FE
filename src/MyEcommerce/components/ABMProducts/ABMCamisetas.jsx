@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
-import ABMComponent from '../../components/ABM/index';
-import Menu from '../../components/Menu/index';
-import LoadingSpinner from '../../components/LoadingSpinner/index';
-import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
+import ABMComponent from '../ABMComponent';
+import LoadingSpinner from '../LoadingSpinner/index';
+import BootstrapForm from '../Formularios/BootstrapForm/index';
 import { Button } from 'react-bootstrap';
 
-const Products = () => {
+const ProductsCamisetas = () => {
   const [productoForm, setProductoForm] = useState({
     name: '',
     description: '',
@@ -14,7 +13,7 @@ const Products = () => {
     id: null,
     SKU: '',
     category: '',
-    img: null,
+    img: '',
   });
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +31,7 @@ const Products = () => {
   const showProducts = async () => {
     try {
       setLoading(true);
-      const querySnapshot = await firebase.db.collection('productos').get();
+      const querySnapshot = await firebase.db.collection('camisetas').get();
       setProductos(querySnapshot.docs);
       setLoading(false);
       setReload(false);
@@ -58,11 +57,11 @@ const Products = () => {
       let newProducts;
       if (productoForm.id === null) {
         newProducts = await firebase.db
-          .collection('productos')
+          .collection('camisetas')
           .add(productoForm);
       } else {
         newProducts = await firebase.db
-          .doc('productos/' + productoForm.id)
+          .doc('camisetas/' + productoForm.id)
           .set(productoForm);
       }
 
@@ -88,7 +87,7 @@ const Products = () => {
   const handleCLickDelete = async (producto) => {
     try {
       const documentDelete = await firebase.db
-        .doc('productos/' + producto.id)
+        .doc('camisetas/' + producto.id)
         .delete();
       setReload(true);
       console.log(documentDelete);
@@ -102,10 +101,9 @@ const Products = () => {
   } else {
     return (
       <div>
-        <Menu category='Destacados' />
         <form onSubmit={handleSubmit}>
           <div>
-            <h2>Alta de productos</h2>
+            <h2>Alta de productos camisetas</h2>
           </div>
           <div>
             <BootstrapForm
@@ -153,6 +151,15 @@ const Products = () => {
             />
           </div>
           <div>
+            <BootstrapForm
+              label='Imagen'
+              type='text'
+              name='img'
+              value={productoForm.img}
+              change={handleChange}
+            />
+          </div>
+          <div>
             <Button type='submit' variant='warning' size='sm'>
               Agregar
             </Button>
@@ -160,8 +167,9 @@ const Products = () => {
         </form>
         <h2>Listado de productos</h2>
         <div style={styles.cards}>
-          {productos.map((producto) => (
+          {productos.map((producto, i) => (
             <ABMComponent
+              key={producto.id}
               datos={{ ...producto.data(), id: producto.id }}
               clickCambiar={handleClickCambiar}
               clickDelete={handleCLickDelete}
@@ -173,4 +181,4 @@ const Products = () => {
   }
 };
 
-export default Products;
+export default ProductsCamisetas;

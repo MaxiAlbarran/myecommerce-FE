@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import firebase from '../../config/firebase';
 import HomeComponent from '../../components/Home/index';
-import Menu from '../../components/Menu/index';
+import Menu from '../../components/Menu/MenuUsuarios/index';
 import LoadingSpinner from '../../components/LoadingSpinner/index';
 import Titulo from '../../components/Title';
 
@@ -24,7 +24,7 @@ const HomeTech = () => {
         const documents = await firebase.db.collection('tecnologia').get();
         setProductos(documents.docs);
         setLoading(false);
-        console.log(productos);
+        console.log('Estos son los productos: ', productos);
       } catch (e) {
         console.log('Error', e.message);
       }
@@ -37,13 +37,14 @@ const HomeTech = () => {
   } else {
     return (
       <div>
-        <Menu category='Tech' />
+        <Menu category='Tech' login={true} />
         <div>
           <Titulo message='Productos de tecnologia' />
         </div>
         <div style={styles.layout}>
-          {productos.map((producto) => (
+          {productos.map((producto, i) => (
             <HomeComponent
+              key={producto.id}
               datos={{ ...producto.data(), id: producto.id }}
               category='Tech'
               bg='light'
