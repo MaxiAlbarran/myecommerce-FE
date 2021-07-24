@@ -33,7 +33,7 @@ const GetUsers = () => {
     if (reload) {
       showClients();
     }
-  }, [reload]);
+  }, [reload, clients]);
 
   const handleCLickDelete = async (clients) => {
     try {

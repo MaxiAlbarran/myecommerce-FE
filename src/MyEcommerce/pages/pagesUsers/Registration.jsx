@@ -19,7 +19,6 @@ const Registration = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    console.log('Formulario completado', info);
     let email = info.email;
     let password = info.password;
     try {
@@ -34,8 +33,8 @@ const Registration = () => {
         username: info.username,
         idIngreso: newUser.user.uid,
       });
+      console.log(document)
       setAlerts({ variant: 'success', text: 'Registro exitoso' });
-      console.log('Nuevo documento', document);
       setLoading(false);
       setShowAlert(true);
     } catch (e) {
@@ -55,7 +54,6 @@ const Registration = () => {
           text: 'Este Email ya se encuentra en uso',
         });
       }
-      console.log(e);
       setLoading(false);
     }
   };

@@ -31,7 +31,7 @@ const HomeCamisetas = () => {
       }
     };
     showProducts();
-  }, []);
+  }, [productos]);
 
   if (loading) {
     return <LoadingSpinner variant='danger' />;

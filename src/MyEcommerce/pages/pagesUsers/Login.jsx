@@ -15,7 +15,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log('Formulario completado', usuario);
     let email = usuario.email;
     let password = usuario.password;
     try {
@@ -40,7 +39,6 @@ const Login = () => {
           text: 'La contraseña ingresada no existe o no concuerda con el Email ingresado',
         });
       }
-      console.log(e);
     }
   };
 

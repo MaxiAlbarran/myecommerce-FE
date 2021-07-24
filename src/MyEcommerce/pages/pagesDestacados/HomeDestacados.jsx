@@ -31,7 +31,7 @@ const Home = () => {
       }
     };
     showProducts();
-  }, []);
+  }, [productos]);
 
   if (loading) {
     return <LoadingSpinner variant='danger' />;

@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import { Alert, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
