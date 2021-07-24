@@ -3,7 +3,6 @@ import firebase from '../../config/firebase';
 import LoadingButton from '../../components/Formularios/LoadingButton/index';
 import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
 import Alerts from '../../components/Formularios/Alerts/index';
-import Menu from '../../components/Menu/MenuUsuarios/index';
 
 const Registration = () => {
   const [info, setInfo] = useState({
@@ -24,7 +23,7 @@ const Registration = () => {
     let email = info.email;
     let password = info.password;
     try {
-      const newUser = await firebase.registro.createUserWithEmailAndPassword(
+      const newUser = await firebase.auth.createUserWithEmailAndPassword(
         email,
         password
       );
@@ -70,7 +69,6 @@ const Registration = () => {
 
   return (
     <div>
-      <Menu login={false} />
       <h1>Complete con sus datos</h1>
       <form onSubmit={handleSubmit}>
         <div>

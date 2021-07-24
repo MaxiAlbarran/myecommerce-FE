@@ -5,14 +5,11 @@ import { useHistory } from 'react-router-dom';
 import BootstrapForm from '../../components/Formularios/BootstrapForm/index';
 import LoadingButton from '../../components/Formularios/LoadingButton/index';
 import Alerts from '../../components/Formularios/Alerts/index';
-import Menu from '../../components/Menu/MenuUsuarios/index';
 
 const Login = () => {
   const [usuario, setUsuario] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [alerts, setAlerts] = useState({ variant: '', text: '' });
-  const [isLogin, setIsLogin] = useState(false);
-  const [owner, setOwner] = useState(false);
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -22,18 +19,14 @@ const Login = () => {
     let email = usuario.email;
     let password = usuario.password;
     try {
-      const userTrue = await firebase.registro.signInWithEmailAndPassword(
+      const userTrue = await firebase.auth.signInWithEmailAndPassword(
         email,
         password
       );
       setLoading(false);
-      console.log('Usuario valido', userTrue);
-      if (userTrue.user.uid === 'FvLD4DXtjvOsqEPtMwZcViqdrgx2') {
-        setOwner(true);
-      } else {
+      if (userTrue.user.uid !== 'FvLD4DXtjvOsqEPtMwZcViqdrgx2') {
         history.push('Home/Destacados');
       }
-      setIsLogin(true);
     } catch (e) {
       setLoading(false);
       if (e.code === 'auth/invalid-email') {
@@ -59,7 +52,6 @@ const Login = () => {
 
   return (
     <div>
-      <Menu login={isLogin} owner={owner} />
       <h1>Bienvenido a My Ecommerce!</h1>
       <form onSubmit={handleSubmit}>
         <div>

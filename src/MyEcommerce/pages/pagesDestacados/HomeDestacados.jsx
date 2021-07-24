@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import firebase from '../../config/firebase';
 import HomeComponent from '../../components/Home/index';
-import Menu from '../../components/Menu/MenuUsuarios/index';
 import LoadingSpinner from '../../components/LoadingSpinner/index';
 import Titulo from '../../components/Title';
+import { AuthContext } from '../../contexts/Auth';
 
 const Home = () => {
   const [productos, setProductos] = useState([]);
@@ -17,6 +17,7 @@ const Home = () => {
       marginBottom: '5px',
     },
   };
+  const { usuario } = useContext(AuthContext);
 
   useEffect(() => {
     const showProducts = async () => {
@@ -37,22 +38,26 @@ const Home = () => {
   } else {
     return (
       <div>
-        <Menu category='Destacados' login={true}/>
-        <div>
-          <Titulo message='Productos destacados' />
-        </div>
-        <div style={styles.layout}>
-          {productos.map((producto, i) => (
-            <HomeComponent
-              key={producto.id}
-              datos={{ ...producto.data(), id: producto.id }}
-              category='Destacados'
-              bg='dark'
-              text='light'
-              border='light'
-            />
-          ))}
-        </div>
+        <Titulo message='Productos destacados' />
+        {usuario !== null && (
+          <>
+            <div style={styles.layout}>
+              {productos.map((producto, i) => (
+                <HomeComponent
+                  key={producto.id}
+                  datos={{ ...producto.data(), id: producto.id }}
+                  category='Destacados'
+                  bg='dark'
+                  text='light'
+                  border='light'
+                />
+              ))}
+            </div>
+          </>
+        )}
+        {usuario === null && (
+          <>Inicie sesion para consultar nuestros productos</>
+        )}
       </div>
     );
   }

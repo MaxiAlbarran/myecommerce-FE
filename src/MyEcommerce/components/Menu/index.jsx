@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { AuthContext } from '../../contexts/Auth';
 
-const MenuUsuarios = (props) => {
-  const { category, login, owner } = props;
-  console.log(owner);
+const Menu = () => {
+  const location = useLocation();
+  console.log('Location', location);
+  const { usuario, isOwner, handleClickLogOut } = useContext(AuthContext);
 
-  if (!login) {
+  if (!usuario) {
     return (
       <Navbar bg='light' variant='light' expand='lg'>
         <Navbar.Brand>Maxi Albarran Ecommerce</Navbar.Brand>
@@ -24,7 +26,7 @@ const MenuUsuarios = (props) => {
     return (
       <Navbar bg='light' variant='light' expand='lg'>
         <Navbar.Brand>Maxi Albarran Ecommerce</Navbar.Brand>
-        <Nav.Link as={Link} to={'/Home/' + category}>
+        <Nav.Link as={Link} to={'/Home/Destacados'}>
           Inicio
         </Nav.Link>
         <Nav className='mr-auto'>
@@ -41,7 +43,7 @@ const MenuUsuarios = (props) => {
               Tecnologia
             </NavDropdown.Item>
           </NavDropdown>
-          {owner && (
+          {isOwner && (
             <>
               <Nav.Link as={Link} to={'/Registro/Usuarios'}>
                 Usuarios
@@ -53,8 +55,8 @@ const MenuUsuarios = (props) => {
           )}
         </Nav>
         <Nav>
-          <Nav.Link as={Link} to='/'>
-            Login
+          <Nav.Link onClick={handleClickLogOut}>
+            Cerrar sesion
           </Nav.Link>
           <Nav.Link as={Link} to='/Registro'>
             Registrarse
@@ -65,4 +67,4 @@ const MenuUsuarios = (props) => {
   }
 };
 
-export default MenuUsuarios;
+export default Menu;

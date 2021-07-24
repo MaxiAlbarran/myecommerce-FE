@@ -12,7 +12,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.db = firebase.firestore();
-firebase.registro = firebase.auth();
+firebase.auth = firebase.auth();
 firebase.storage = firebase.storage();
 
 export default firebase;

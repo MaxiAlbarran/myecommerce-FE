@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
 
 const HomeComponent = (props) => {
   const { datos, category, bg, text, border } = props;
-  console.log(datos);
 
   return (
     <div>

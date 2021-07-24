@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './MyEcommerce/pages/pagesUsers/Login';
 import Registration from './MyEcommerce/pages/pagesUsers/Registration';
 import Home from './MyEcommerce/pages/pagesDestacados/HomeDestacados';
@@ -10,12 +10,15 @@ import DetalleTech from './MyEcommerce/pages/pagesTech/DetalleTech';
 import GetUsers from './MyEcommerce/pages/OwnerPages/UsuariosPage/GetUsers';
 import ABMPage from './MyEcommerce/pages/OwnerPages/ABMPage/index'
 import { Container } from 'react-bootstrap';
+import Menu from './MyEcommerce/components/Menu';
 
 
 function App() {
   return (
     <BrowserRouter>
-      <Container>
+    <Menu />
+     <Switch>
+     <Container>
         <Route path='/' exact component={Login} />
         <Route path='/Registro' exact component={Registration} />
         <Route path='/Home/Destacados' exact component={Home} />
@@ -31,6 +34,7 @@ function App() {
         <Route path='/Registro/Usuarios' exact component={GetUsers} />
         <Route path='/ABM' exact component={ABMPage} />
       </Container>
+     </Switch>
     </BrowserRouter>
   );
 }
