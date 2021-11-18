@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import Routes from './routes';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {AuthProvider} from './MyEcommerce/contexts/Auth'
+import { AuthProvider } from './Contexts/Auth';
 
 ReactDOM.render(
   <React.StrictMode>
-   <AuthProvider>
-   <App />
-   </AuthProvider>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
