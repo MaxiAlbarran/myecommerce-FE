@@ -4,7 +4,7 @@ import ABMCamisetas from './ABMCamisetas';
 import ABMTech from './ABMTech';
 
 const ABMPage = () => {
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState('destacados');
   console.log(category);
 
   return (

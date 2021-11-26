@@ -2,13 +2,12 @@ import React from 'react';
 import { Card, Button, ListGroup } from 'react-bootstrap';
 
 const UsersComponent = (props) => {
-  const { datos, clickDelete, key } = props;
+  const { datos, clickDelete } = props;
   const styles = {
     boton: {
       marginLeft: '10px',
     },
   };
-  console.log("Este es el id", datos.idIngreso)
 
   return (
     <Card style={{ width: '18rem', marginBottom: '10px' }} border='dark'>

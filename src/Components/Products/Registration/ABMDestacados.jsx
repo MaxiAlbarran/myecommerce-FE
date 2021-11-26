@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import firebase from '../../../Firebase/firebase';
+import React, { useState } from 'react';
 import ABMComponent from './Common/index';
 import LoadingSpinner from '../../Common/Spinner/index';
 import BootstrapForm from '../../Common/Forms/BootstrapForm';
 import { Button } from 'react-bootstrap';
+import useShowProducts from '../../../hooks/useShowProducts';
+import useDelete from '../../../hooks/ABM/useDelete';
+import useSubmitProduct from '../../../hooks/ABM/useSubmitProduct';
+import './ABM.css'
+
 
 const Products = () => {
   const [productoForm, setProductoForm] = useState({
@@ -15,63 +19,11 @@ const Products = () => {
     category: '',
     img: null,
   });
-  const [productos, setProductos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [reload, setReload] = useState(false);
-  const styles = {
-    cards: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-    },
-  };
 
-  const showProducts = async () => {
-    try {
-      setLoading(true);
-      const querySnapshot = await firebase.db.collection('productos').get();
-      setProductos(querySnapshot.docs);
-      setLoading(false);
-      setReload(false);
-    } catch (e) {
-      console.log('Error', e.message);
-    }
-  };
+const [productos , loading] = useShowProducts('productos');
+const [handleSubmit] = useSubmitProduct('productos', productoForm);
+const [handleCLickDelete] = useDelete('productos');
 
-  useEffect(() => {
-    showProducts();
-  }, []);
-
-  useEffect(() => {
-    if (reload) {
-      showProducts();
-    }
-  }, [reload]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Completado', productoForm);
-    try {
-      let newProducts;
-      if (productoForm.id === null) {
-        newProducts = await firebase.db
-          .collection('productos')
-          .add(productoForm);
-      } else {
-        newProducts = await firebase.db
-          .doc('productos/' + productoForm.id)
-          .set(productoForm);
-      }
-
-      console.log('Producto agregado', newProducts);
-      setReload(true);
-    } catch (e) {
-      alert(e.message);
-      console.log(e);
-    }
-  };
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -84,18 +36,7 @@ const Products = () => {
     console.log(producto);
   };
 
-  const handleCLickDelete = async (producto) => {
-    try {
-      const documentDelete = await firebase.db
-        .doc('productos/' + producto.id)
-        .delete();
-      setReload(true);
-      console.log(documentDelete);
-    } catch (e) {
-      console.log('error', e.message);
-    }
-  };
-
+ 
   if (loading) {
     return <LoadingSpinner variant='danger' />;
   } else {
@@ -157,7 +98,7 @@ const Products = () => {
           </div>
         </form>
         <h2>Listado de productos</h2>
-        <div style={styles.cards}>
+        <div className="cards">
           {productos.map((producto, i) => (
             <ABMComponent
               key={producto.id}

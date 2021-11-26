@@ -1,28 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import firebase from '../../../../Firebase/firebase';
+import React, {  useState } from 'react';
+import useGetProduct from '../../../../hooks/useGetproduct';
 import LoadingSpinner from '../../../Common/Spinner';
 import ProductsDetails from '../Common/index';
 
 const DetalleTech = (props) => {
   const id = props.match.params.id;
-  const [carga, setCarga] = useState(true);
-  const [detalles, setDetalles] = useState({});
+  const [detalles, loading] = useGetProduct('tecnologia', id);
   const [showAlert, setShowAlert] = useState({ variant: '', text: '' });
 
   const handleClick = () => {
     setShowAlert({ variant: 'primary', text: 'Gracias por su compra!' });
   };
 
-  useEffect(() => {
-    const getProduct = async () => {
-      const document = await firebase.db.doc('tecnologia/' + id).get();
-      setCarga(false);
-      setDetalles(document.data());
-    };
-    getProduct();
-  }, []);
-
-  if (carga) {
+  if (loading) {
     return <LoadingSpinner variant='danger' />;
   } else {
     return (
