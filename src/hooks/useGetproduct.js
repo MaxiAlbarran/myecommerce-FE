@@ -12,7 +12,7 @@ const useGetProduct = (coleccion, id) => {
       setDetalles(document.data());
     };
     getProduct();
-  }, []);
+  }, [coleccion, id]);
 
     return [detalles, carga];
 }

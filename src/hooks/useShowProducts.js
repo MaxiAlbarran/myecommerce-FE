@@ -17,7 +17,7 @@ const useShowProducts = (coleccion) => {
       }
     };
     showProducts();
-  }, [products]);
+  }, [coleccion]);
 
   return [products, loading];
 

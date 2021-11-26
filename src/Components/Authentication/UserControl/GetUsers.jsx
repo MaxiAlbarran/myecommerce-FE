@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import firebase from '../../../Firebase/firebase';
+import React from 'react';
+import useDelete from '../../../hooks/ABM/useDelete';
+import useShowProducts from '../../../hooks/useShowProducts';
 import LoadingSpinner from '../../Common/Spinner/index';
 import Titulo from '../../Common/Title/index';
 import UsersComponent from './index';
 
 const GetUsers = () => {
-  const [clients, setClients] = useState([]);
-  const [reload, setReload] = useState(true);
-  const [loading, setLoading] = useState(false);
   const styles = {
     layout: {
       display: 'flex',
@@ -18,36 +16,8 @@ const GetUsers = () => {
     },
   };
 
-  useEffect(() => {
-    const showClients = async () => {
-      try {
-        setLoading(true);
-        const documents = await firebase.db.collection('clientes').get();
-        setClients(documents.docs);
-        setLoading(false);
-        console.log("Estos son los clientes",clients);
-      } catch (e) {
-        console.log('Error', e.message);
-      }
-    };
-    if (reload) {
-      showClients();
-    }
-  }, []);
-
-  const handleCLickDelete = async (clients) => {
-    try {
-      setReload(false);
-      const documentDelete = await firebase.db
-        .doc('clientes/' + clients.id)
-        .delete();
-      setReload(true);
-      console.log(documentDelete);
-      await firebase.auth.currentUser.delete();
-    } catch (e) {
-      console.log('error', e.message);
-    }
-  };
+  const [clients, loading] = useShowProducts('clientes');
+  const [handleClickDelete] = useDelete('clientes')
 
   if (loading) {
     return (
@@ -65,7 +35,7 @@ const GetUsers = () => {
             <UsersComponent
               key={client.id}
               datos={{ ...client.data(), id: client.id }}
-              clickDelete={handleCLickDelete}
+              clickDelete={handleClickDelete}
             />
           ))}
         </div>
