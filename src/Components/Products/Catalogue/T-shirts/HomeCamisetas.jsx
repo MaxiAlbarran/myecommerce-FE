@@ -17,7 +17,7 @@ const HomeCamisetas = () => {
     return (
       <div>
         <div>
-          <Titulo message='Nuevo ingreso de Camisetas' />
+          <Titulo message='Camisetas disponibles' bg="#adb5bd"/>
         </div>
         {usuario !== null && (
           <>

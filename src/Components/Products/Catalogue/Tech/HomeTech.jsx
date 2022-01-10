@@ -17,7 +17,7 @@ const HomeTech = () => {
     return (
       <div>
         <div>
-          <Titulo message='Productos de tecnologia' />
+          <Titulo message='Productos de tecnologia' bg='#d9d9d9'/>
         </div>
         {usuario !== null && (
           <>

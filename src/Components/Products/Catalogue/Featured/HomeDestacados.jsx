@@ -14,8 +14,8 @@ const Home = () => {
     return <LoadingSpinner variant='danger' />;
   } else {
     return (
-      <div>
-        <Titulo message='Productos destacados' />
+      <div >
+        <Titulo message='Productos destacados' bg="#001219" letters="#ede0d4" />
         {usuario !== null && (
           <>
             <div className="layout">
