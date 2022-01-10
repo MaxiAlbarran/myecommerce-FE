@@ -3,5 +3,40 @@
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 5px;
 }
+
+.img {
+  border-radius: 30px;
+  padding: 20px;
+}
+
+.card {
+  width: 20rem;
+  height: 500px;
+  overflow: auto;
+
+}
+
+.card::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.card::-webkit-scrollbar:vertical {
+  width:10px;
+}
+
+.card::-webkit-scrollbar-button:increment,.card::-webkit-scrollbar-button {
+  display: none;
+} 
+
+.card::-webkit-scrollbar-thumb {
+  background-color: #b1adad;
+  border-radius: 20px;
+  border: 2px solid #f1f2f3;
+  height: 5px;
+}
+
+.card::-webkit-scrollbar-track {
+  border-radius: 10px;  
+}
+

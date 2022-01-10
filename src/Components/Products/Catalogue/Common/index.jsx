@@ -1,20 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { Button, Card } from 'react-bootstrap';
+import '../catalogue.css'
 
 const HomeComponent = (props) => {
   const { datos, category, bg, text, border } = props;
 
   return (
-    <div>
+    <div style={{margin:'20px'}}>
       <Card
-        style={{ width: '20rem', height: 'auto' }}
+        className="card"
         border={border}
         bg={bg}
         text={text}
       >
         <Card.Body>
-          <Card.Img variant='top' src={datos.img} />
+          <Card.Img variant='top' className="img"src={datos.img} />
           <Card.Title>{datos.name}</Card.Title>
           <Card.Text>ARS ${datos.price}</Card.Text>
           <Card.Text>Stock: {datos.SKU}</Card.Text>
