@@ -11,7 +11,7 @@ const Menu = () => {
   if (!usuario) {
     return (
       <Navbar bg='light' variant='light' expand='lg'>
-        <Navbar.Brand>Maxi Albarran Ecommerce</Navbar.Brand>
+        <Navbar.Brand>MyEcommerce</Navbar.Brand>
         <Nav>
           <Nav.Link as={Link} to='/'>
             Login
@@ -25,7 +25,7 @@ const Menu = () => {
   } else {
     return (
       <Navbar bg='light' variant='light' expand='lg'>
-        <Navbar.Brand>Maxi Albarran Ecommerce</Navbar.Brand>
+        <Navbar.Brand>MyEcommerce</Navbar.Brand>
         <Nav.Link as={Link} to={'/Home/Destacados'}>
           Inicio
         </Nav.Link>
